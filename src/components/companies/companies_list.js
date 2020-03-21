@@ -17,7 +17,7 @@ const CompaniesList = ({company}) => {
   )
 }
 
-CompaniesList.propTypes = {
+CompaniesList.propTypes = { // don't know if we need to check types again
   company: PropTypes.shape({
     albumId: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,

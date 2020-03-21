@@ -11,7 +11,6 @@ const Companies = (props) => {
   const { loading, companies } = Company;
  
   useEffect(() => {
-    console.log('ppp')
     companiesListAction()
   }, []);
 
@@ -47,6 +46,7 @@ const Companies = (props) => {
 
 Companies.propTypes = {
   companiesListAction: PropTypes.func.isRequired,
+  loadCompanies: PropTypes.func,
   Company: PropTypes.shape({
     companies: PropTypes.arrayOf(
       PropTypes.shape({
