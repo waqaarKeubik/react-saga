@@ -3,7 +3,7 @@ import React from 'react';
 const Malls = (props) => {
 
   return (
-    <h1>Malls</h1>
+    <h4>Malls</h4>
   )
 }
 

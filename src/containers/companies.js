@@ -7,9 +7,11 @@ import {Row, Col} from 'reactstrap';
 
 const Companies = (props) => {
 
-  const { companiesListAction, companies, loading } = props;
-
+  const { companiesListAction, Company } = props;
+  const { loading, companies } = Company;
+ 
   useEffect(() => {
+    console.log('ppp')
     companiesListAction()
   }, []);
 
@@ -31,7 +33,7 @@ const Companies = (props) => {
 
   return (
     <>
-      <h1>Companies</h1>
+      <h4>Companies</h4>
       {
         loading
           ? 
@@ -45,25 +47,25 @@ const Companies = (props) => {
 
 Companies.propTypes = {
   companiesListAction: PropTypes.func.isRequired,
-  loadCompanies: PropTypes.func,
-  loading: PropTypes.bool.isRequired,
-  companies: PropTypes.arrayOf(
-    PropTypes.shape({
-      albumId: PropTypes.number.isRequired,
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-      thumbnailUrl: PropTypes.string.isRequired
-    }).isRequired
-  ).isRequired
+  Company: PropTypes.shape({
+    companies: PropTypes.arrayOf(
+      PropTypes.shape({
+          albumId: PropTypes.number.isRequired,
+          id: PropTypes.number.isRequired,
+          title: PropTypes.string.isRequired,
+          url: PropTypes.string.isRequired,
+          thumbnailUrl: PropTypes.string.isRequired
+        }).isRequired
+      ).isRequired,
+    loading: PropTypes.bool.isRequired
+  })
 }
 
 const mapDispatchToProps = {companiesListAction}
 
 function mapStateToProps(state) {
   return {
-    companies: state.Company.companies,
-    loading: state.Company.loading
+    Company: state.Company
   }
 }
 
