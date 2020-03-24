@@ -2,8 +2,9 @@ import React, {useEffect} from 'react';
 import { companiesListAction } from './../actions/companyAction';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
-import CompaniesList from './../components/companies/companies_list';
+import CompaniesList from '../components/companies/list/companies_list';
 import {Row, Col} from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const Companies = (props) => {
 
@@ -12,6 +13,7 @@ const Companies = (props) => {
  
   useEffect(() => {
     companiesListAction()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadCompanies = () => {
@@ -33,6 +35,7 @@ const Companies = (props) => {
   return (
     <>
       <h4>Companies</h4>
+      <Link to="/add-company">Add company</Link>
       {
         loading
           ? 
