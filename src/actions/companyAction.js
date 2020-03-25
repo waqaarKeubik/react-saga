@@ -5,10 +5,10 @@ export const InputStringAction = (object) => {
   }
 }
 
-export const InputFileAction = (object) => {
+export const addCompanyAction = (data) => {
   return {
-    type: 'INPUT_FILE',
-    object
+    type: 'ADD_COMPANY',
+    data
   }
 }
 

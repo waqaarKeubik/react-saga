@@ -3,70 +3,62 @@ import AddCompanyHoc from './../../../HOCs/add_company'
 import InputText from './../../forms/InputText'
 import InputFile from './../../forms/InputFile'
 import { connect } from 'react-redux';
-import { InputStringAction, InputFileAction } from './../../../actions/companyAction'
+import { InputStringAction } from './../../../actions/companyAction';
+import { showInputFieldError } from './../../../utils/common';
 
 const CompanyInformation = (props) => {
 
   let form_key = 'company_information';
   const { form, InputStringAction, errors } = props;
 
-  const initialState = {
-    company_name: {
-      input_val: form.company_name,
-      required: true,
-      type: String,
-      condition: {
-        min: 1,
-        max: 20
-      }
-    },
-    company_logo: {
-      input_val: form.company_logo,
-      required: true
-    }
-  }
-
   const handleInputTextChange = (data) => {
     const { name } = data;
     const object = {
       target: data,
-      initialState: initialState[name],
+      initialState: form[name],
       key: form_key
     }
     InputStringAction(object);
   }
   const handleInputFileChange = (file) => {
-    console.log(file);
-    let object = {
-      data: file,
+    let name = file.name;
+    const data = {
+      name: name,
+      value: file.value ? file.value : ''
+    }
+    const object = {
+      target: data,
+      initialState: form[name],
       key: form_key
     }
-    InputFileAction(object);
+    InputStringAction(object);
   }
 
   return (
     <div>
-      <pre>{JSON.stringify(errors, null, 2)}</pre>
       <InputText 
         type="text"
         label="Company name"
         name="company_name"
         placeholder="Unifynd Technologies"
+        error={showInputFieldError(errors, 'company_name')}
         handleInputTextChange={handleInputTextChange}
-        value={initialState.company_name.input_val}
+        value={form.company_name.input_val}
         />
+
       <InputFile
         type="file"
         label="Company logo"
         name="company_logo"
         placeholder="Company logo"
+        error={showInputFieldError(errors, 'company_logo')}
         handleInputFileChange={handleInputFileChange}
         />
     </div>
   )
 }
 
-const mapDispatchToProps = { InputStringAction, InputFileAction };
+const mapDispatchToProps = { InputStringAction };
 
 function mapStateTopProps (state) {
   return {

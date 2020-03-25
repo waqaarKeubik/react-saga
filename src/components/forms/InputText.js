@@ -1,7 +1,8 @@
 import React from 'react'
 import { Col, FormGroup, Label, Input } from 'reactstrap';
 
-const InputText = ({handleInputTextChange, label, ...restProps}) => {
+
+const InputText = ({label, handleInputTextChange, error, ...restProps}) => {
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -17,6 +18,7 @@ const InputText = ({handleInputTextChange, label, ...restProps}) => {
           onChange={handleChange}
           {...restProps}
           />
+        {error && <span>{error}</span>}
       </Col>
     </FormGroup>
   )

@@ -6,3 +6,13 @@ export const formateKeyName = (key) => {
   }
   return formatted_key.join(' ');
 }
+
+export const showInputFieldError = (errors, key) => {
+  let indexIs = errors.findIndex((error) => {
+    return error.key === key
+  })
+  if (indexIs > -1) {
+   return errors[indexIs].msg;
+  }
+  return;
+}
